@@ -1,5 +1,6 @@
 package edu.eci.arsw.moneylaundering;
 
+import sun.awt.windows.ThemeReader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,7 +20,7 @@ public class MoneyLaundering implements Runnable
     private TransactionReader transactionReader;
     private int amountOfFilesTotal;
     private AtomicInteger amountOfFilesProcessed;
-    private ConcurrentLinkDeque<ProcessThreads> threads;
+    private ConcurrentLinkedDeque <ProcessThreads> threads;
     private static final int ThreadNumber = 5;
     private boolean pause = false;
 
@@ -28,7 +29,7 @@ public class MoneyLaundering implements Runnable
         transactionAnalyzer = new TransactionAnalyzer();
         transactionReader = new TransactionReader();
         amountOfFilesProcessed = new AtomicInteger();
-        threads = new ConcurrentLinkDeque<>();
+        threads = new ConcurrentLinkedDeque<>();
         pause = false;
         amountOfFilesTotal = -1;
 
@@ -44,9 +45,9 @@ public class MoneyLaundering implements Runnable
 
         for (int i = 0; i<ThreadNumber; i++){
             if(i==ThreadNumber-1){
-                threads.add(new ProcessTransactionDataThread(transactionFiles, i*range, amountOfFilesTotal-1, transactionAnalyzer, amountOfFilesProcessed, transactionReader));
+                threads.add(new ProcessThreads(transactionFiles, i*range, amountOfFilesTotal-1, transactionAnalyzer, amountOfFilesProcessed, transactionReader));
             } else {
-                threads.add(new ProcessTransactionDataThread(transactionFiles, i*range, (i*range)+range-1, transactionAnalyzer, amountOfFilesProcessed, transactionReader));
+                threads.add(new ProcessThreads(transactionFiles, i*range, (i*range)+range-1, transactionAnalyzer, amountOfFilesProcessed, transactionReader));
             }
             threads.getLast().start();
         }

@@ -32,7 +32,7 @@ public class ProcessThreads extends Thread{
                 while (pause) {
                     try {
                         wait();
-                    } catch (InterruptedExceotion e) {
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
 
