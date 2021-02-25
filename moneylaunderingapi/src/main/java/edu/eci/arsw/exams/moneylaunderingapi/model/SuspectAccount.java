@@ -4,9 +4,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class SuspectAccount {
     public String accountId;
-    public int amountOfSmallTransactions;
+    public AtomicInteger amountOfSmallTransactions;
 
-    public suspectAccount(String accountId, int amountOfSmallTransactions){
+    public SuspectAccount(String accountId, int amountOfSmallTransactions) {
         this.accountId = accountId;
         this.amountOfSmallTransactions = new AtomicInteger(amountOfSmallTransactions);
     }

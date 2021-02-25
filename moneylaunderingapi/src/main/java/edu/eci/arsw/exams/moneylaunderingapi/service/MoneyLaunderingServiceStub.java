@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-@Service
+@Service("MoneyLaunderingServiceStub")
 public class MoneyLaunderingServiceStub implements MoneyLaunderingService {
     private List<SuspectAccount> suspectAccounts = new CopyOnWriteArrayList<>();
 
